@@ -78,7 +78,8 @@
     "importHistoryFileLine": "File: {{path}}",
     "importHistorySizeLine": "Size: {{actual}}, limit: {{limit}}",
     "importHistoryLocationLine": "Location: line {{line}}, column {{column}}",
-    "importHistorySourceLine": "Source: {{source}}"
+    "importHistorySourceLine": "Source: {{source}}",
+    "addSkill": "Add Skill"
   },
   "authMethod": "Authentication",
   "geminiApiKey": "Gemini API Key",
@@ -1173,5 +1174,23 @@
   "updateReadyInstall": "{{version}} is ready, install now",
   "assistantAgentUnavailable": "The required agent is currently unavailable.",
   "assistantAgentMissing": "The required agent is not installed.",
-  "assistantTeamUnsupported": "This assistant cannot be used in team mode right now."
+  "assistantTeamUnsupported": "This assistant cannot be used in team mode right now.",
+  "webui.letButlerSetup": "Let the butler set it up",
+  "talkToButler": {
+    "createViaChat": "Create via chat",
+    "createManually": "Create manually",
+    "addViaChat": "Add via chat",
+    "addManually": "Add manually",
+    "solveViaChat": "Solve via chat",
+    "enabledToast": "Enabled the AionUi Butler for you",
+    "prompt": {
+      "createAssistant": "Help me create a new assistant and walk me through setting it up.",
+      "addCustomAgent": "Help me add a custom Agent.",
+      "addModel": "Help me add a new LLM provider and API key, then set it as the default model.",
+      "addMcp": "Help me set up an MCP server.",
+      "addSkill": "Help me import a skill and attach it to an assistant.",
+      "setupRemote": "Help me set up remote access so I can open AionUi from my phone or over the internet.",
+      "diagnose": "I ran into a problem with AionUi, please help me diagnose it.\n\n[Module] {{module}}\n[Description] {{description}}\n[Attachments] see the screenshots in the input.\n\nPlease diagnose the cause and tell me how to fix it."
+    }
+  }
 }

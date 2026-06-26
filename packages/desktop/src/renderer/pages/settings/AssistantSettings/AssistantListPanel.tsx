@@ -4,6 +4,7 @@
  */
 import type { DragEndEvent } from '@dnd-kit/core';
 import { useLayoutContext } from '@/renderer/hooks/context/LayoutContext';
+import TalkToButlerButton from '@/renderer/components/base/TalkToButlerButton';
 import type { AssistantListItem } from './types';
 import { resolveAssistantSourceTag } from './assistantUtils';
 import AssistantAvatar from './AssistantAvatar';
@@ -11,7 +12,7 @@ import { DndContext, PointerSensor, closestCenter, useSensor, useSensors } from 
 import { SortableContext, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { Button, Dropdown, Menu, Switch, Tag, Tooltip } from '@arco-design/web-react';
-import { Attention, Drag, MoreOne, Plus } from '@icon-park/react';
+import { Attention, Drag, MoreOne } from '@icon-park/react';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -361,16 +362,17 @@ const AssistantListPanel: React.FC<AssistantListPanelProps> = ({
               </p>
             </div>
             <div className={`${isMobile ? 'w-full' : 'flex-shrink-0'}`}>
-              <Button
-                type='primary'
-                size='small'
-                className={`!rounded-8px ${isMobile ? '!h-36px !w-full' : '!h-32px !px-14px'}`}
-                icon={<Plus size={14} fill='currentColor' />}
-                onClick={onCreate}
+              <TalkToButlerButton
+                className={isMobile ? '!w-full' : undefined}
+                label={t('settings.createAssistant', { defaultValue: 'Create Assistant' })}
+                chatLabel={t('settings.talkToButler.createViaChat', { defaultValue: 'Create via chat' })}
+                onManual={onCreate}
+                manualLabel={t('settings.talkToButler.createManually', { defaultValue: 'Create manually' })}
+                prompt={t('settings.talkToButler.prompt.createAssistant', {
+                  defaultValue: 'Help me create a new assistant and walk me through setting it up.',
+                })}
                 data-testid='btn-create-assistant'
-              >
-                {t('settings.createAssistant', { defaultValue: 'Create Assistant' })}
-              </Button>
+              />
             </div>
           </div>
         </div>

@@ -78,7 +78,8 @@
     "importHistoryFileLine": "File: {{path}}",
     "importHistorySizeLine": "Size: {{actual}}, limit: {{limit}}",
     "importHistoryLocationLine": "Location: line {{line}}, column {{column}}",
-    "importHistorySourceLine": "Source: {{source}}"
+    "importHistorySourceLine": "Source: {{source}}",
+    "addSkill": "스킬 추가"
   },
   "authMethod": "인증",
   "geminiApiKey": "Gemini API 키",
@@ -1175,5 +1176,23 @@
   "updateReadyInstall": "{{version}} 준비 완료, 지금 설치",
   "assistantAgentUnavailable": "필요한 에이전트를 현재 사용할 수 없습니다.",
   "assistantAgentMissing": "필요한 에이전트가 설치되지 않았습니다.",
-  "assistantTeamUnsupported": "이 어시스턴트는 현재 팀 모드에서 사용할 수 없습니다."
+  "assistantTeamUnsupported": "이 어시스턴트는 현재 팀 모드에서 사용할 수 없습니다.",
+  "webui.letButlerSetup": "집사에게 설정 맡기기",
+  "talkToButler": {
+    "createViaChat": "대화로 만들기",
+    "createManually": "수동으로 만들기",
+    "addViaChat": "대화로 추가",
+    "addManually": "수동으로 추가",
+    "solveViaChat": "대화로 해결",
+    "enabledToast": "AionUi 집사를 활성화했습니다",
+    "prompt": {
+      "createAssistant": "새 어시스턴트를 만들고 설정을 안내해 주세요.",
+      "addCustomAgent": "사용자 지정 Agent 추가를 도와주세요.",
+      "addModel": "새 LLM 공급자와 API 키를 추가하고 기본 모델로 설정해 주세요.",
+      "addMcp": "MCP 서버 설정을 도와주세요.",
+      "addSkill": "스킬을 가져와 어시스턴트에 연결해 주세요.",
+      "setupRemote": "휴대폰이나 외부에서 AionUi를 열 수 있도록 원격 접속을 설정해 주세요.",
+      "diagnose": "AionUi 사용 중 문제가 발생했습니다. 진단을 도와주세요.\n\n[모듈] {{module}}\n[문제 설명] {{description}}\n[첨부] 입력창의 스크린샷 참조.\n\n원인을 진단하고 해결 방법을 알려주세요."
+    }
+  }
 }

@@ -377,15 +377,30 @@ const GuidPage: React.FC = () => {
   // this history entry (e.g. via back navigation), which would otherwise revive
   // the prompt from the still-present location.state.
   const consumedPrefillKeyRef = useRef<string | null>(null);
+  // When a "via chat" navigation also pins an assistant (selectedAssistantId),
+  // the assistant-selection cleanup effect below fires a state-clearing
+  // replace() that churns location.key. That second pass has no prefillPrompt
+  // and would otherwise wipe the freshly seeded input. This flag lets exactly
+  // one such follow-up pass skip the clear, preserving the seeded prompt.
+  const skipNextClearRef = useRef(false);
   useLayoutEffect(() => {
-    const prefillPrompt = (location.state as { prefillPrompt?: string } | null)?.prefillPrompt;
+    const prefillState = location.state as { prefillPrompt?: string; prefillFiles?: string[] } | null;
+    const prefillPrompt = prefillState?.prefillPrompt;
+    const prefillFiles = prefillState?.prefillFiles;
     if (prefillPrompt && consumedPrefillKeyRef.current !== location.key) {
+      // Consume prompt + optional attachments (e.g. bug-report screenshots) once.
       consumedPrefillKeyRef.current = location.key;
+      skipNextClearRef.current = true;
       guidInput.setInput(prefillPrompt);
+      guidInput.setFiles(prefillFiles && prefillFiles.length > 0 ? prefillFiles : []);
+    } else if (skipNextClearRef.current) {
+      // This pass is the state-clearing replace() right after a prefill — keep
+      // the seeded input instead of clearing it.
+      skipNextClearRef.current = false;
     } else {
       guidInput.setInput('');
+      guidInput.setFiles([]);
     }
-    guidInput.setFiles([]);
     guidInput.setLoading(false);
     if (!(location.state as { workspace?: string } | null)?.workspace) {
       guidInput.setDir('');

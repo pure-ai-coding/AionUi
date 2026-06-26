@@ -98,13 +98,15 @@ describe('AssistantListPanel', () => {
     expect(screen.queryAllByTestId('avatar')).toHaveLength(0);
   });
 
-  it('calls onCreate when create button is clicked (callback spy)', async () => {
+  it('calls onCreate from the create-via-chat menu manual item (callback spy)', async () => {
     const user = userEvent.setup();
     const onCreateSpy = vi.fn();
     renderWithProviders(<AssistantListPanel {...defaultProps} onCreate={onCreateSpy} />);
 
-    const createButton = screen.getByTestId('btn-create-assistant');
-    await user.click(createButton);
+    // The create button is now a TalkToButlerButton: clicking it opens a menu;
+    // "Create manually" is what runs onCreate.
+    await user.click(screen.getByTestId('btn-create-assistant'));
+    await clickMenuItem('btn-create-assistant-manual');
 
     expect(onCreateSpy).toHaveBeenCalledTimes(1);
   });

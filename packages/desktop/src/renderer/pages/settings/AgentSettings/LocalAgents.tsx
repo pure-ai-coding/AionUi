@@ -11,7 +11,7 @@ import AionModal from '@/renderer/components/base/AionModal';
 import { useManagedAgents } from '@/renderer/hooks/agent/useManagedAgents';
 import { openExternalUrl } from '@/renderer/utils/platform';
 import { Button, Message, Radio, Typography } from '@arco-design/web-react';
-import { Plus } from '@icon-park/react';
+import TalkToButlerButton from '@/renderer/components/base/TalkToButlerButton';
 import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import AgentCard from './AgentCard';
@@ -246,15 +246,15 @@ const LocalAgents: React.FC = () => {
         <Typography.Text className='text-12px font-medium text-t-secondary block'>
           {t('settings.agentManagement.customAgents', { defaultValue: 'Custom Agents' })}
         </Typography.Text>
-        <Button
-          type='primary'
-          size='small'
-          icon={<Plus size={14} fill='currentColor' />}
-          className='!h-32px !rounded-8px !px-14px'
-          onClick={openCustomAgentEditor}
-        >
-          {t('common.add', { defaultValue: 'Add' })}
-        </Button>
+        <TalkToButlerButton
+          label={t('common.add', { defaultValue: 'Add' })}
+          chatLabel={t('settings.talkToButler.addViaChat', { defaultValue: 'Add via chat' })}
+          onManual={openCustomAgentEditor}
+          manualLabel={t('settings.talkToButler.addManually', { defaultValue: 'Add manually' })}
+          prompt={t('settings.talkToButler.prompt.addCustomAgent', {
+            defaultValue: 'Help me add a custom Agent.',
+          })}
+        />
       </div>
 
       <AionModal

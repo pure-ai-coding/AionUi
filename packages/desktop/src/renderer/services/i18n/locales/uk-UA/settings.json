@@ -78,7 +78,8 @@
     "importHistoryFileLine": "File: {{path}}",
     "importHistorySizeLine": "Size: {{actual}}, limit: {{limit}}",
     "importHistoryLocationLine": "Location: line {{line}}, column {{column}}",
-    "importHistorySourceLine": "Source: {{source}}"
+    "importHistorySourceLine": "Source: {{source}}",
+    "addSkill": "Додати навичку"
   },
   "authMethod": "Автентифікація",
   "geminiApiKey": "API-ключ Gemini",
@@ -1095,5 +1096,23 @@
   "updateReadyInstall": "{{version}} готова, установити зараз",
   "assistantAgentUnavailable": "Потрібний агент зараз недоступний.",
   "assistantAgentMissing": "Потрібний агент не встановлено.",
-  "assistantTeamUnsupported": "Цей асистент зараз не можна використовувати в командному режимі."
+  "assistantTeamUnsupported": "Цей асистент зараз не можна використовувати в командному режимі.",
+  "webui.letButlerSetup": "Нехай дворецький налаштує",
+  "talkToButler": {
+    "createViaChat": "Створити через чат",
+    "createManually": "Створити вручну",
+    "addViaChat": "Додати через чат",
+    "addManually": "Додати вручну",
+    "solveViaChat": "Вирішити через чат",
+    "enabledToast": "Дворецького AionUi увімкнено для вас",
+    "prompt": {
+      "createAssistant": "Допоможи створити нового асистента та проведи мене через його налаштування.",
+      "addCustomAgent": "Допоможи додати власний Agent.",
+      "addModel": "Допоможи додати нового провайдера LLM та API-ключ, потім зроби його моделлю за замовчуванням.",
+      "addMcp": "Допоможи налаштувати сервер MCP.",
+      "addSkill": "Допоможи імпортувати навичку та прив’язати її до асистента.",
+      "setupRemote": "Допоможи налаштувати віддалений доступ, щоб відкривати AionUi з телефона або через інтернет.",
+      "diagnose": "У мене виникла проблема з AionUi, допоможи її діагностувати.\n\n[Модуль] {{module}}\n[Опис] {{description}}\n[Вкладення] див. скриншоти в полі введення.\n\nБудь ласка, визнач причину та підкажи, як виправити."
+    }
+  }
 }
