@@ -18,6 +18,10 @@
 
 ---
 
+> **🔧 pure-ai-coding 分支说明**：本分支将默认 Agent 从内置引擎改为 **Claude Code CLI**，并隐藏 Team 模式入口以简化体验。改动仅为默认行为调整，不删除任何其他 Agent 支持代码。
+
+---
+
 <p align="center">
   <strong>免费、开源，与AI Agents协作的Cowork App</strong><br>
   <em>内置 Agent | 零配置 | 任意 API 密钥 | 多 Agent | 远程访问 | 跨平台 | 24/7 自动化</em>
