@@ -18,6 +18,10 @@
 
 ---
 
+> **🔧 pure-ai-coding fork note**: This fork changes the default agent from the built-in engine to **Claude Code CLI** and hides the Team mode entry for a simplified experience. No other agent code is removed — only default behavior is adjusted.
+
+---
+
 <p align="center">
   <strong>A free, open-source, Cowork app with AI Agents</strong><br>
   <em>Built-in Agent | Zero Setup | Any API Key | Multi-Agents | Remote Access | Cross-Platform | 24/7 Automation</em>
