@@ -111,7 +111,7 @@ const buildImportHistoryGroups = (records: SkillImportRecord[]): SkillImportHist
     }
     byOperation.set(record.operation_id, group);
   }
-  return Array.from(byOperation.values()).sort((a, b) => b.createdAt - a.createdAt);
+  return Array.from(byOperation.values()).toSorted((a, b) => b.createdAt - a.createdAt);
 };
 
 const hasImportedRecords = (group: SkillImportHistoryGroup): boolean =>

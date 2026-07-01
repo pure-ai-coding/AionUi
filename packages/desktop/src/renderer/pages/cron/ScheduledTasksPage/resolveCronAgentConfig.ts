@@ -5,7 +5,7 @@
  */
 
 import type { ICronAgentConfigWrite } from '@/common/adapter/ipcBridge';
-import { isAionrsAssistant, type Assistant } from '@/common/types/agent/assistantTypes';
+import { assistantRuntimeKey, type Assistant } from '@/common/types/agent/assistantTypes';
 import { resolveAssistantName } from '@renderer/utils/model/assistantDisplay';
 
 type SelectedAionrsProvider = {
@@ -55,7 +55,7 @@ export function resolveCronAgentConfig(input: ResolveCronAgentConfigInput): Reso
   const assistantName = resolveAssistantName(assistant, localeKey, assistant.name);
   const mode = getMode(assistant);
 
-  if (isAionrsAssistant(assistant)) {
+  if (assistantRuntimeKey(assistant) === 'aionrs') {
     if (!selectedAionrsProvider?.id || !model_id) {
       throw new Error(aionrsModelRequiredMessage);
     }

@@ -80,12 +80,9 @@ const AgentRepairPanel: React.FC<AgentRepairPanelProps> = ({ agent, onSaved }) =
   const [error, setError] = useState('');
   const savingRef = useRef(false);
   const initialHasOverridesRef = useRef(false);
-  const isInternalAionCli = agent.agent_type === 'aionrs' && agent.agent_source === 'internal';
-
   // Load current overrides on mount. The repair page is itself the explicit
   // entry point, so there's no separate unlock step.
   useEffect(() => {
-    if (isInternalAionCli) return;
 
     let cancelled = false;
     void (async () => {
@@ -107,7 +104,7 @@ const AgentRepairPanel: React.FC<AgentRepairPanelProps> = ({ agent, onSaved }) =
     return () => {
       cancelled = true;
     };
-  }, [agent.id, isInternalAionCli]);
+  }, [agent.id]);
 
   const handleReset = useCallback(() => {
     setCommandOverride('');
@@ -223,25 +220,23 @@ const AgentRepairPanel: React.FC<AgentRepairPanelProps> = ({ agent, onSaved }) =
           which field below to use. */}
       <Alert type={banner.type} title={banner.title} content={banner.content} className='!rounded-8px' />
 
-      {!isInternalAionCli && showPath ? pathBlock : null}
-      {!isInternalAionCli ? envBlock : null}
+      {showPath ? pathBlock : null}
+      {envBlock}
 
       {/* Error Alert */}
       {error && <Alert type='error' content={error} closable onClose={() => setError('')} className='!rounded-8px' />}
 
       {/* Save Button */}
-      {!isInternalAionCli ? (
-        <Button
-          type='primary'
-          size='large'
-          disabled={isSaving}
-          loading={isSaving}
-          onClick={handleSave}
-          className='!rounded-8px'
-        >
-          {t('settings.repair.saveAndTest')}
-        </Button>
-      ) : null}
+      <Button
+        type='primary'
+        size='large'
+        disabled={isSaving}
+        loading={isSaving}
+        onClick={handleSave}
+        className='!rounded-8px'
+      >
+        {t('settings.repair.saveAndTest')}
+      </Button>
     </div>
   );
 };

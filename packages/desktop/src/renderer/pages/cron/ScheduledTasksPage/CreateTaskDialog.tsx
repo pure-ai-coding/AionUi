@@ -27,7 +27,7 @@ import { getConversationCreateErrorMessage } from '@renderer/pages/conversation/
 import { resolveAssistantAvatar } from '@renderer/utils/model/assistantAvatar';
 import { resolveAssistantName } from '@renderer/utils/model/assistantDisplay';
 import { resolveCronAgentConfig } from './resolveCronAgentConfig';
-import { assistantRuntimeKey, isAionrsAssistant } from '@/common/types/agent/assistantTypes';
+import { assistantRuntimeKey } from '@/common/types/agent/assistantTypes';
 
 const FormItem = Form.Item;
 const TextArea = Input.TextArea;
@@ -517,7 +517,7 @@ const CreateTaskDialog: React.FC<CreateTaskDialogProps> = ({
                 const logo = resolveAgentLogo(logos, {
                   backend: runtimeKey,
                 });
-                const disabled = isAionrsAssistant(assistant) && !hasAionrsProvider;
+                const disabled = runtimeKey === 'aionrs' && !hasAionrsProvider;
                 return (
                   <Option key={assistant.id} value={assistant.id} disabled={disabled}>
                     <div

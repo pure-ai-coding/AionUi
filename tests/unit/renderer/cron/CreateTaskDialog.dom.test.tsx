@@ -5,7 +5,7 @@
  */
 
 import userEvent from '@testing-library/user-event';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import React from 'react';
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { Assistant } from '@/common/types/agent/assistantTypes';
@@ -201,6 +201,19 @@ describe('CreateTaskDialog', () => {
     expect(screen.getByText('cron.page.form.assistantLockedExistingConversation')).toBeInTheDocument();
   });
 
+  it('does not disable the Claude Code assistant option when no aionrs provider is configured', async () => {
+    const user = userEvent.setup();
+    currentAssistants = [...assistants(), claudeAssistant()];
+
+    render(<CreateTaskDialog visible onClose={() => {}} />);
+
+    await user.click(await screen.findByTestId('cron-assistant-select'));
+
+    const claudeOption = await screen.findByRole('option', { name: /Claude Code/i });
+    expect(claudeOption).not.toHaveClass('arco-select-option-disabled');
+    expect(within(claudeOption).queryByText('cron.page.form.aionrsNoProvider')).not.toBeInTheDocument();
+  });
+
   it('does not send agent config when updating an ongoing conversation task', async () => {
     const user = userEvent.setup();
 
@@ -304,6 +317,28 @@ function assistants(): Assistant[] {
       models: [],
     } as Assistant,
   ];
+}
+
+function claudeAssistant(): Assistant {
+  return {
+    id: 'assistant-claude',
+    source: 'builtin',
+    name: 'Claude Code',
+    name_i18n: {},
+    description_i18n: {},
+    avatar: '🤖',
+    enabled: true,
+    sort_order: 2,
+    agent_id: 'agent-claude',
+    agent: { type: 'acp', source: 'builtin', acp_backend: 'claude' },
+    enabled_skills: [],
+    custom_skill_names: [],
+    disabled_builtin_skills: [],
+    context_i18n: {},
+    prompts: [],
+    prompts_i18n: {},
+    models: [],
+  } as Assistant;
 }
 
 function bareAssistant(): Assistant {

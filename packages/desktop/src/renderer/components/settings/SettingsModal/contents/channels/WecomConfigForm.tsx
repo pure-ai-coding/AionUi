@@ -6,7 +6,7 @@
 
 import type { IChannelPairingRequest, IChannelPluginStatus, IChannelUser } from '@/common/types/channel/channel';
 import { assistants, channel, type IWebUIStatus } from '@/common/adapter/ipcBridge';
-import { isAionrsAssistant, type Assistant } from '@/common/types/agent/assistantTypes';
+import { assistantRuntimeKey, type Assistant } from '@/common/types/agent/assistantTypes';
 import { resolveLocaleKey } from '@/common/utils';
 import { openExternalUrl } from '@/renderer/utils/platform';
 import { resolveAssistantName } from '@/renderer/utils/model/assistantDisplay';
@@ -284,7 +284,7 @@ const WecomConfigForm: React.FC<WecomConfigFormProps> = ({
   };
 
   const hasExistingUsers = authorizedUsers.length > 0;
-  const showModelSelector = isAionrsAssistant(selectedAssistant);
+  const showModelSelector = assistantRuntimeKey(selectedAssistant) === 'aionrs';
   const assistantOptions = availableAssistants;
   const selectedAssistantName = selectedAssistant
     ? resolveAssistantName(selectedAssistant, localeKey, selectedAssistant.name)
@@ -458,7 +458,7 @@ const WecomConfigForm: React.FC<WecomConfigFormProps> = ({
                         setSelectedAssistant(assistant);
                         void persistSelectedAssistant(assistant);
 
-                        if (isAionrsAssistant(assistant)) {
+                        if (assistantRuntimeKey(assistant) === 'aionrs') {
                           const providers = modelSelection.providers;
                           const savedProviderExists =
                             modelSelection.current_model?.id &&

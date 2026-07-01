@@ -6,7 +6,7 @@
 
 import type { IChannelPairingRequest, IChannelPluginStatus, IChannelUser } from '@/common/types/channel/channel';
 import { assistants, channel } from '@/common/adapter/ipcBridge';
-import { isAionrsAssistant, type Assistant } from '@/common/types/agent/assistantTypes';
+import { assistantRuntimeKey, type Assistant } from '@/common/types/agent/assistantTypes';
 import { resolveLocaleKey } from '@/common/utils';
 import { getBaseUrl } from '@/common/adapter/httpBridge';
 import { resolveAssistantName } from '@/renderer/utils/model/assistantDisplay';
@@ -301,7 +301,7 @@ const WeixinConfigForm: React.FC<WeixinConfigFormProps> = ({ pluginStatus, model
     handleLoginWebUI();
   };
 
-  const showModelSelector = isAionrsAssistant(selectedAssistant);
+  const showModelSelector = assistantRuntimeKey(selectedAssistant) === 'aionrs';
   const assistantOptions = availableAssistants;
   const selectedAssistantName = selectedAssistant
     ? resolveAssistantName(selectedAssistant, localeKey, selectedAssistant.name)
@@ -419,7 +419,7 @@ const WeixinConfigForm: React.FC<WeixinConfigFormProps> = ({ pluginStatus, model
                       setSelectedAssistant(assistant);
                       void persistSelectedAssistant(assistant);
 
-                      if (isAionrsAssistant(assistant)) {
+                      if (assistantRuntimeKey(assistant) === 'aionrs') {
                         const providers = modelSelection.providers;
                         const savedProviderExists =
                           modelSelection.current_model?.id &&
