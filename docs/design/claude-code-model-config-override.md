@@ -75,13 +75,13 @@ if meta.backend.as_deref() == Some("claude") {
 
 ## 方案对比
 
-| | 方案 A：`env_override`（HTTP API） | 方案 B：模拟 cc-switch 文件 |
-|---|---|---|
-| 生效时机 | 下一次新会话立即生效（写入即触发内存缓存刷新） | 下一次会话构建时（每次都重新读文件） |
-| 覆盖粒度 | per-agent-row（`agent_metadata.id`），天然按 agent 区分 | 全局单一 active provider，不区分 agent |
-| 需要的接口 | AionCore 已有的一等公民 HTTP API，有 schema、有鉴权 | 需要精确复刻第三方工具的私有 SQLite + JSON 格式（未文档化，可能随 cc-switch 升级漂移） |
-| 与真实 cc-switch 共存 | 不冲突，且优先级低于 cc-switch（符合预期的降级顺序） | **会与用户机器上真实的 cc-switch 数据打架**（同一份 `~/.cc-switch/` 文件，互相覆盖） |
-| 推荐度 | ✅ 推荐 | ❌ 不推荐，仅作备选 |
+|                       | 方案 A：`env_override`（HTTP API）                      | 方案 B：模拟 cc-switch 文件                                                            |
+| --------------------- | ------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| 生效时机              | 下一次新会话立即生效（写入即触发内存缓存刷新）          | 下一次会话构建时（每次都重新读文件）                                                   |
+| 覆盖粒度              | per-agent-row（`agent_metadata.id`），天然按 agent 区分 | 全局单一 active provider，不区分 agent                                                 |
+| 需要的接口            | AionCore 已有的一等公民 HTTP API，有 schema、有鉴权     | 需要精确复刻第三方工具的私有 SQLite + JSON 格式（未文档化，可能随 cc-switch 升级漂移） |
+| 与真实 cc-switch 共存 | 不冲突，且优先级低于 cc-switch（符合预期的降级顺序）    | **会与用户机器上真实的 cc-switch 数据打架**（同一份 `~/.cc-switch/` 文件，互相覆盖）   |
+| 推荐度                | ✅ 推荐                                                 | ❌ 不推荐，仅作备选                                                                    |
 
 **结论：优先采用方案 A。** 方案 B 依赖未文档化的外部私有格式，还要处理 SQLite 并发写入，
 且会与用户真实安装的 cc-switch 产生数据冲突，脆弱度明显更高。
@@ -153,7 +153,7 @@ aioncore，也不存在缓存滞后问题。之后任何新会话通过
 （`custom_agent.rs:22-28`）：
 
 ```json
-{ "command_override": null, "env_override": [ { "name": "ANTHROPIC_MODEL", "value": "..." } ] }
+{ "command_override": null, "env_override": [{ "name": "ANTHROPIC_MODEL", "value": "..." }] }
 ```
 
 ### Agent id

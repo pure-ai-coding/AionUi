@@ -156,13 +156,9 @@ describe('TelegramConfigForm default model selector', () => {
       default_model: null,
     });
 
-    render(
-      <TelegramConfigForm pluginStatus={null} modelSelection={makeSelection()} onStatusChange={() => {}} />
-    );
+    render(<TelegramConfigForm pluginStatus={null} modelSelection={makeSelection()} onStatusChange={() => {}} />);
 
-    expect(
-      await screen.findByText('Automatically follow the model when CLI is running')
-    ).toBeInTheDocument();
+    expect(await screen.findByText('Automatically follow the model when CLI is running')).toBeInTheDocument();
   });
 
   it('shows the real model dropdown when an aionrs assistant is selected', async () => {

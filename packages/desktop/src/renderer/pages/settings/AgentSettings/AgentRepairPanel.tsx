@@ -83,7 +83,6 @@ const AgentRepairPanel: React.FC<AgentRepairPanelProps> = ({ agent, onSaved }) =
   // Load current overrides on mount. The repair page is itself the explicit
   // entry point, so there's no separate unlock step.
   useEffect(() => {
-
     let cancelled = false;
     void (async () => {
       try {
